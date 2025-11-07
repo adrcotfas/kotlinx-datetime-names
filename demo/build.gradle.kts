@@ -80,3 +80,6 @@ dependencies {
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 }
 
+tasks.matching { it.name == "checkSigningConfiguration" }.configureEach {
+    enabled = false
+}

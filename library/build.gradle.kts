@@ -73,11 +73,6 @@ dependencies {
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 }
 
-// Workaround for Kotlin 2.2.x CheckSigningTask issue
-tasks.named("checkSigningConfiguration") {
-    enabled = false
-}
-
 mavenPublishing {
     publishToMavenCentral()
 

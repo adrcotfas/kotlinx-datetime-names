@@ -9,27 +9,11 @@ A Kotlin Multiplatform library that provides localized display names for [kotlin
 
 This library extends `kotlinx-datetime` by adding extension functions to get localized display names for `DayOfWeek` and `Month` enums. It supports multiple text styles (FULL, SHORT, NARROW) and uses platform-specific localization APIs to provide accurate, locale-aware formatting.
 
-## Supported Platforms
-
-- **Android** (API 21+)
-- **iOS** (iOS 11+)
-- **JVM** (Java 11+)
-
 ## Installation
-
-### Gradle (Kotlin DSL)
 
 ```kotlin
 dependencies {
     implementation("io.github.adrcotfas:kotlinx-datetime-names:0.1.0")
-}
-```
-
-### Gradle (Groovy DSL)
-
-```gradle
-dependencies {
-    implementation 'io.github.adrcotfas:kotlinx-datetime-names:0.1.0'
 }
 ```
 
