@@ -3,7 +3,8 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.adrcotfas/kotlinx-datetime-names)](https://central.sonatype.com/artifact/io.github.adrcotfas/kotlinx-datetime-names)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-A Kotlin Multiplatform library that provides localized display names for [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) types.
+A Kotlin Multiplatform library that provides localized display names for [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) types.  
+See https://github.com/Kotlin/kotlinx-datetime/pull/586 too.
 
 ## What is it?
 
@@ -66,10 +67,9 @@ println(day.getDisplayName(TextStyle.NARROW, locale)) // "M"
 - `TextStyle.NARROW_STANDALONE` - Narrow standalone name
 
 ## Demo
-
-<img src="images/demo_android.png" alt="Android Demo" width="300"/> <img src="images/demo_ios.png" alt="iOS Demo" width="300"/>
-
 The library includes a demo app that showcases localized names across different locales and text styles.
+
+<img src="images/demo_android.png" alt="Android Demo" height="650"/> <img src="images/demo_ios.png" alt="iOS Demo" height="650"/>
 
 ## License
 
