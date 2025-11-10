@@ -14,7 +14,7 @@ This library extends `kotlinx-datetime` by adding extension functions to get loc
 
 ```kotlin
 dependencies {
-    implementation("io.github.adrcotfas:kotlinx-datetime-names:0.1.0")
+    implementation("io.github.adrcotfas:kotlinx-datetime-names:0.1.1")
 }
 ```
 
