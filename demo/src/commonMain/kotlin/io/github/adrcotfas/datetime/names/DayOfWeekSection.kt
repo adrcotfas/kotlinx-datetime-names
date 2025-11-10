@@ -1,8 +1,6 @@
 package io.github.adrcotfas.datetime.names
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,27 +12,27 @@ fun DayOfWeekSection(
     selectedLocale: LocaleOption,
     selectedTextStyle: TextStyle,
     onTextStyleSelected: (TextStyle) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Text(
             text = "Days of Week",
             style = MaterialTheme.typography.headlineSmall,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
         )
 
         TextStyleSelector(
             selectedTextStyle = selectedTextStyle,
-            onTextStyleSelected = onTextStyleSelected
+            onTextStyleSelected = onTextStyleSelected,
         )
 
         DayOfWeek.entries.forEach { dayOfWeek ->
             NameCard(
                 label = dayOfWeek.name,
-                displayName = dayOfWeek.getDisplayName(selectedTextStyle, selectedLocale.locale)
+                displayName = dayOfWeek.getDisplayName(selectedTextStyle, selectedLocale.locale),
             )
         }
     }

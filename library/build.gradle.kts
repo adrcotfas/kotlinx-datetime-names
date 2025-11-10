@@ -19,8 +19,14 @@ kotlin {
     jvm()
     androidLibrary {
         namespace = "io.github.adrcotfas.datetime.names"
-        compileSdk = libs.versions.android.compileSdk.get().toInt()
-        minSdk = libs.versions.android.minSdk.get().toInt()
+        compileSdk =
+            libs.versions.android.compileSdk
+                .get()
+                .toInt()
+        minSdk =
+            libs.versions.android.minSdk
+                .get()
+                .toInt()
 
         withJava() // enable java compilation support
         withDeviceTestBuilder {

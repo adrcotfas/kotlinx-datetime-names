@@ -14,9 +14,8 @@ actual fun LocalDateTime.format(
     dateStyle: FormatStyle,
     timeStyle: FormatStyle,
     locale: PlatformLocale,
-    timeZone: TimeZone
+    timeZone: TimeZone,
 ): String {
-
     val nsComponents = this.toNSDateComponents()
     val dateFormatter =
         NSDateFormatter().apply {
@@ -27,7 +26,8 @@ actual fun LocalDateTime.format(
         }
 
     val calendar = NSCalendar.currentCalendar
-    val date = calendar.dateFromComponents(nsComponents)
+    val date =
+        calendar.dateFromComponents(nsComponents)
             ?: error("Failed to create NSDate from LocalDateTime: $this")
 
     return dateFormatter.stringFromDate(date)

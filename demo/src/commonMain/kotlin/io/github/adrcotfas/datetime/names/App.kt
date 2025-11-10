@@ -12,7 +12,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 enum class DateTimeType {
     LOCAL_DATE_TIME,
     LOCAL_DATE,
-    LOCAL_TIME
+    LOCAL_TIME,
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,36 +36,38 @@ fun App() {
                 Column {
                     TopAppBar(
                         title = { Text("kotlinx-datetime-names") },
-                        colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
+                        colors =
+                            TopAppBarDefaults.topAppBarColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                            ),
                     )
 
                     LocaleSelector(
                         selectedLocale = selectedLocale,
                         localeOptions = localeOptions,
-                        onLocaleSelected = { selectedLocale = it }
+                        onLocaleSelected = { selectedLocale = it },
                     )
                 }
-            }
+            },
         ) { paddingValues ->
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .padding(paddingValues)
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        .padding(paddingValues)
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 // Platform info
                 Card(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
                             text = "Running on: ${getPlatform().name}",
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.titleMedium,
                         )
                     }
                 }
@@ -80,21 +82,21 @@ fun App() {
                     selectedDateFormatStyle = selectedDateFormatStyle,
                     onDateFormatStyleSelected = { selectedDateFormatStyle = it },
                     selectedTimeFormatStyle = selectedTimeFormatStyle,
-                    onTimeFormatStyleSelected = { selectedTimeFormatStyle = it }
+                    onTimeFormatStyleSelected = { selectedTimeFormatStyle = it },
                 )
 
                 // Days of Week
                 DayOfWeekSection(
                     selectedLocale = selectedLocale,
                     selectedTextStyle = selectedDayOfWeekTextStyle,
-                    onTextStyleSelected = { selectedDayOfWeekTextStyle = it }
+                    onTextStyleSelected = { selectedDayOfWeekTextStyle = it },
                 )
 
                 // Months
                 MonthSection(
                     selectedLocale = selectedLocale,
                     selectedTextStyle = selectedMonthTextStyle,
-                    onTextStyleSelected = { selectedMonthTextStyle = it }
+                    onTextStyleSelected = { selectedMonthTextStyle = it },
                 )
             }
         }

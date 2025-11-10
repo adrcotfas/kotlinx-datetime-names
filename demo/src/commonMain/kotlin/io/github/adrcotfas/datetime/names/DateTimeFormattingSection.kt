@@ -7,10 +7,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.delay
-import kotlinx.datetime.*
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
+import kotlinx.coroutines.delay
+import kotlinx.datetime.*
 
 @OptIn(ExperimentalTime::class)
 @Composable
@@ -24,7 +24,7 @@ fun DateTimeFormattingSection(
     onDateFormatStyleSelected: (FormatStyle) -> Unit,
     selectedTimeFormatStyle: FormatStyle,
     onTimeFormatStyleSelected: (FormatStyle) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var currentTime by remember { mutableStateOf(Clock.System.now()) }
 
@@ -37,32 +37,33 @@ fun DateTimeFormattingSection(
 
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Text(
             text = "DateTime Formatting",
             style = MaterialTheme.typography.headlineSmall,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
         )
 
         Card(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Column(
                 modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 // DateTime Type Selection
                 Text(
                     text = "Date/Time Type",
                     style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .horizontalScroll(rememberScrollState()),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .horizontalScroll(rememberScrollState()),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     DateTimeType.entries.forEach { type ->
                         FilterChip(
@@ -74,9 +75,9 @@ fun DateTimeFormattingSection(
                                         DateTimeType.LOCAL_DATE_TIME -> "LocalDateTime"
                                         DateTimeType.LOCAL_DATE -> "LocalDate"
                                         DateTimeType.LOCAL_TIME -> "LocalTime"
-                                    }
+                                    },
                                 )
-                            }
+                            },
                         )
                     }
                 }
@@ -88,19 +89,20 @@ fun DateTimeFormattingSection(
                         Text(
                             text = "Date Style",
                             style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .horizontalScroll(rememberScrollState()),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .horizontalScroll(rememberScrollState()),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
                         ) {
                             FormatStyle.entries.forEach { style ->
                                 FilterChip(
                                     selected = selectedDateFormatStyle == style,
                                     onClick = { onDateFormatStyleSelected(style) },
-                                    label = { Text(style.name) }
+                                    label = { Text(style.name) },
                                 )
                             }
                         }
@@ -109,19 +111,20 @@ fun DateTimeFormattingSection(
                         Text(
                             text = "Time Style",
                             style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .horizontalScroll(rememberScrollState()),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .horizontalScroll(rememberScrollState()),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
                         ) {
                             FormatStyle.entries.forEach { style ->
                                 FilterChip(
                                     selected = selectedTimeFormatStyle == style,
                                     onClick = { onTimeFormatStyleSelected(style) },
-                                    label = { Text(style.name) }
+                                    label = { Text(style.name) },
                                 )
                             }
                         }
@@ -130,19 +133,20 @@ fun DateTimeFormattingSection(
                         Text(
                             text = "Format Style",
                             style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .horizontalScroll(rememberScrollState()),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .horizontalScroll(rememberScrollState()),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
                         ) {
                             FormatStyle.entries.forEach { style ->
                                 FilterChip(
                                     selected = selectedFormatStyle == style,
                                     onClick = { onFormatStyleSelected(style) },
-                                    label = { Text(style.name) }
+                                    label = { Text(style.name) },
                                 )
                             }
                         }
@@ -152,44 +156,45 @@ fun DateTimeFormattingSection(
                 // Formatted result
                 HorizontalDivider()
 
-                val formattedResult = remember(
-                    currentTime,
-                    selectedDateTimeType,
-                    selectedFormatStyle,
-                    selectedDateFormatStyle,
-                    selectedTimeFormatStyle,
-                    selectedLocale
-                ) {
-                    val timeZone = TimeZone.currentSystemDefault()
-                    when (selectedDateTimeType) {
-                        DateTimeType.LOCAL_DATE_TIME -> {
-                            currentTime.toLocalDateTime(timeZone).format(
-                                dateStyle = selectedDateFormatStyle,
-                                timeStyle = selectedTimeFormatStyle,
-                                locale = selectedLocale.locale,
-                                timeZone = timeZone
-                            )
-                        }
-                        DateTimeType.LOCAL_DATE -> {
-                            currentTime.toLocalDateTime(timeZone).date.format(
-                                formatStyle = selectedFormatStyle,
-                                locale = selectedLocale.locale,
-                                timeZone = timeZone
-                            )
-                        }
-                        DateTimeType.LOCAL_TIME -> {
-                            currentTime.toLocalDateTime(timeZone).time.format(
-                                formatStyle = selectedFormatStyle,
-                                locale = selectedLocale.locale
-                            )
+                val formattedResult =
+                    remember(
+                        currentTime,
+                        selectedDateTimeType,
+                        selectedFormatStyle,
+                        selectedDateFormatStyle,
+                        selectedTimeFormatStyle,
+                        selectedLocale,
+                    ) {
+                        val timeZone = TimeZone.currentSystemDefault()
+                        when (selectedDateTimeType) {
+                            DateTimeType.LOCAL_DATE_TIME -> {
+                                currentTime.toLocalDateTime(timeZone).format(
+                                    dateStyle = selectedDateFormatStyle,
+                                    timeStyle = selectedTimeFormatStyle,
+                                    locale = selectedLocale.locale,
+                                    timeZone = timeZone,
+                                )
+                            }
+                            DateTimeType.LOCAL_DATE -> {
+                                currentTime.toLocalDateTime(timeZone).date.format(
+                                    formatStyle = selectedFormatStyle,
+                                    locale = selectedLocale.locale,
+                                    timeZone = timeZone,
+                                )
+                            }
+                            DateTimeType.LOCAL_TIME -> {
+                                currentTime.toLocalDateTime(timeZone).time.format(
+                                    formatStyle = selectedFormatStyle,
+                                    locale = selectedLocale.locale,
+                                )
+                            }
                         }
                     }
-                }
 
                 Text(
                     text = formattedResult,
                     style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
         }

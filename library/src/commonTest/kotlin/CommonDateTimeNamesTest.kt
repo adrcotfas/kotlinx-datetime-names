@@ -1,11 +1,11 @@
 package io.github.adrcotfas.datetime.names
 
-import kotlinx.datetime.DayOfWeek
-import kotlinx.datetime.Month
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.Month
 
 /**
  * Common tests that run on all platforms (JVM, Android, iOS, Linux, etc.)
@@ -218,10 +218,18 @@ class CommonDateTimeNamesTest {
     fun testAllMonthsPresent() {
         val expectedMonths =
             setOf(
-                Month.JANUARY, Month.FEBRUARY, Month.MARCH,
-                Month.APRIL, Month.MAY, Month.JUNE,
-                Month.JULY, Month.AUGUST, Month.SEPTEMBER,
-                Month.OCTOBER, Month.NOVEMBER, Month.DECEMBER,
+                Month.JANUARY,
+                Month.FEBRUARY,
+                Month.MARCH,
+                Month.APRIL,
+                Month.MAY,
+                Month.JUNE,
+                Month.JULY,
+                Month.AUGUST,
+                Month.SEPTEMBER,
+                Month.OCTOBER,
+                Month.NOVEMBER,
+                Month.DECEMBER,
             )
 
         assertEquals(12, expectedMonths.size, "Should have exactly 12 months")

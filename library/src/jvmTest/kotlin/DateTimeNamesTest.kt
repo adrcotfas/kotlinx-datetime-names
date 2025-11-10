@@ -1,12 +1,12 @@
 package io.github.adrcotfas.datetime.names
 
-import kotlinx.datetime.DayOfWeek
-import kotlinx.datetime.Month
 import java.util.Locale
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.Month
 
 class DateTimeNamesTest {
     // ============ MONTH TESTS - ENGLISH ============
@@ -286,8 +286,14 @@ class DateTimeNamesTest {
         for (locale in locales) {
             for (month in Month.entries) {
                 val displayName = month.getDisplayName(locale = locale)
-                assertNotNull(displayName, "Display name should not be null for ${month.name} in locale ${locale.language}")
-                assertTrue(displayName.isNotEmpty(), "Display name should not be empty for ${month.name} in locale ${locale.language}")
+                assertNotNull(
+                    displayName,
+                    "Display name should not be null for ${month.name} in locale ${locale.language}",
+                )
+                assertTrue(
+                    displayName.isNotEmpty(),
+                    "Display name should not be empty for ${month.name} in locale ${locale.language}",
+                )
             }
         }
     }
@@ -299,8 +305,14 @@ class DateTimeNamesTest {
         for (locale in locales) {
             for (day in DayOfWeek.entries) {
                 val displayName = day.getDisplayName(locale = locale)
-                assertNotNull(displayName, "Display name should not be null for ${day.name} in locale ${locale.language}")
-                assertTrue(displayName.isNotEmpty(), "Display name should not be empty for ${day.name} in locale ${locale.language}")
+                assertNotNull(
+                    displayName,
+                    "Display name should not be null for ${day.name} in locale ${locale.language}",
+                )
+                assertTrue(
+                    displayName.isNotEmpty(),
+                    "Display name should not be empty for ${day.name} in locale ${locale.language}",
+                )
             }
         }
     }

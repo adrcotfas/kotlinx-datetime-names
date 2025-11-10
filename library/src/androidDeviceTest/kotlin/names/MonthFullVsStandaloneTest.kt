@@ -2,15 +2,20 @@ package names
 
 import io.github.adrcotfas.datetime.names.TextStyle
 import io.github.adrcotfas.datetime.names.getDisplayName
-import kotlinx.datetime.Month
 import java.util.Locale
 import kotlin.test.Test
 import kotlin.test.assertNotEquals
+import kotlinx.datetime.Month
 
 class MonthFullVsStandaloneTest {
     @Test
     fun testMonthFullVsStandalone() {
-        val polishLocale = Locale.Builder().setLanguage("pl").setRegion("PL").build()
+        val polishLocale =
+            Locale
+                .Builder()
+                .setLanguage("pl")
+                .setRegion("PL")
+                .build()
 
         // Test January
         val januaryFull = Month.JANUARY.getDisplayName(TextStyle.FULL, polishLocale)

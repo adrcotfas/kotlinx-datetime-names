@@ -1,0 +1,32 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+max_line_length = 120
+tab_width = 4
+trim_trailing_whitespace = true
+
+[*.kt]
+indent_size = 4
+continuation_indent_size = 4
+ij_kotlin_imports_layout = *
+# Allow wildcard imports for Compose
+ktlint_standard_no-wildcard-imports = disabled
+# Allow Composable functions to start with uppercase
+ktlint_standard_function-naming = disabled
+
+[*.kts]
+indent_size = 4
+continuation_indent_size = 4
+ij_kotlin_imports_layout = *
+
+[*.md]
+ktlint = disabled
+
+# Exclude generated and build directories
+[{build/**,**/build/**,**/*generated*/**}]
+ktlint = disabled

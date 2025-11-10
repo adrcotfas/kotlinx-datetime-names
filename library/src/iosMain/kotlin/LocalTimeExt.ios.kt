@@ -14,9 +14,8 @@ import platform.Foundation.NSDateFormatterNoStyle
 actual fun LocalTime.format(
     formatStyle: FormatStyle,
     locale: PlatformLocale,
-    timeZone: TimeZone
+    timeZone: TimeZone,
 ): String {
-
     val dateFormatter =
         NSDateFormatter().apply {
             this.locale = locale

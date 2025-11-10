@@ -9,13 +9,12 @@ import platform.Foundation.NSLocale
 // Cache for calendars per locale to avoid repeated creation
 private val calendarCache = mutableMapOf<NSLocale, NSCalendar>()
 
-private fun getOrCreateCalendar(locale: PlatformLocale): NSCalendar {
-    return calendarCache.getOrPut(locale) {
+private fun getOrCreateCalendar(locale: PlatformLocale): NSCalendar =
+    calendarCache.getOrPut(locale) {
         NSCalendar.currentCalendar.apply {
             this.locale = locale
         }
     }
-}
 
 actual fun DayOfWeek.getDisplayName(
     textStyle: TextStyle,

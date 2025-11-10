@@ -1,10 +1,10 @@
 package io.github.adrcotfas.datetime.names
 
+import java.time.format.DateTimeFormatter
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toJavaLocalDate
 import kotlinx.datetime.toJavaZoneId
-import java.time.format.DateTimeFormatter
 
 /**
  * JVM/Android implementation of LocalDate formatting using DateTimeFormatter.
@@ -19,7 +19,8 @@ actual fun LocalDate.format(
             ?: error("Unknown FormatStyle: $formatStyle")
 
     val formatter =
-        DateTimeFormatter.ofLocalizedDate(javaFormatStyle)
+        DateTimeFormatter
+            .ofLocalizedDate(javaFormatStyle)
             .withLocale(locale)
             .withZone(timeZone.toJavaZoneId())
 

@@ -1,12 +1,12 @@
 package io.github.adrcotfas.datetime.names
 
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.LocalTime
 import java.util.Locale
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertTrue
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalTime
 
 class DateTimeFormattingTest {
     @Test

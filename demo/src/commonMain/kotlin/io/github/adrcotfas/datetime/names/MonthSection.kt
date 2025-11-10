@@ -12,27 +12,27 @@ fun MonthSection(
     selectedLocale: LocaleOption,
     selectedTextStyle: TextStyle,
     onTextStyleSelected: (TextStyle) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Text(
             text = "Months",
             style = MaterialTheme.typography.headlineSmall,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
         )
 
         TextStyleSelector(
             selectedTextStyle = selectedTextStyle,
-            onTextStyleSelected = onTextStyleSelected
+            onTextStyleSelected = onTextStyleSelected,
         )
 
         Month.entries.forEach { month ->
             NameCard(
                 label = month.name,
-                displayName = month.getDisplayName(selectedTextStyle, selectedLocale.locale)
+                displayName = month.getDisplayName(selectedTextStyle, selectedLocale.locale),
             )
         }
     }

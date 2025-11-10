@@ -9,5 +9,7 @@ actual fun Month.getDisplayName(
     val javaTextStyle =
         textStyleMapping[textStyle]
             ?: error("Unknown TextStyle: $textStyle")
-    return java.time.Month.of(this.ordinal + 1).getDisplayName(javaTextStyle, locale)
+    return java.time.Month
+        .of(this.ordinal + 1)
+        .getDisplayName(javaTextStyle, locale)
 }
