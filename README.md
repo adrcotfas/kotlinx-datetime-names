@@ -69,7 +69,8 @@ println(day.getDisplayName(TextStyle.NARROW, locale)) // "M"
 ## Demo
 The library includes a demo app that showcases localized names across different locales and text styles.
 
-<img src="images/demo_android.png" alt="Android Demo" height="650"/> <img src="images/demo_ios.png" alt="iOS Demo" height="650"/>
+<img src="images/demo_android_localdate.png" alt="Android Demo" height="650"/> <img src="images/demo_ios_localdate.png" alt="iOS Demo" height="650"/>  
+<img src="images/demo_android_names.png" alt="Android Demo" height="650"/> <img src="images/demo_ios_names.png" alt="iOS Demo" height="650"/>
 
 ## License
 
