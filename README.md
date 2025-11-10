@@ -4,8 +4,6 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A Kotlin Multiplatform library that provides localized display names for [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) types.
-See https://github.com/Kotlin/kotlinx-datetime/pull/586 too.
-
 ## What is it?
 
 This library extends `kotlinx-datetime` by adding extension functions to get localized display names for `DayOfWeek` and `Month` enums, as well as format `LocalDateTime`, `LocalDate`, and `LocalTime` values. It supports multiple text styles (FULL, SHORT, NARROW) and format styles, using platform-specific localization APIs to provide accurate, locale-aware formatting.
