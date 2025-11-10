@@ -99,3 +99,8 @@ tasks.matching { it.name.startsWith("assemble") }.configureEach {
     dependsOn(":library:ktlintFormat")
     dependsOn(":demo:ktlintFormat")
 }
+
+// Disable Swift Export tasks to avoid "Collection contains more than one matching element" error
+tasks.matching { it.name.contains("SwiftExport") }.configureEach {
+    enabled = false
+}

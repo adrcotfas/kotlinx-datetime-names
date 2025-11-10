@@ -35,7 +35,10 @@ fun App() {
             topBar = {
                 Column {
                     TopAppBar(
-                        title = { Text("kotlinx-datetime-names") },
+                        title = {
+                            val platform = getPlatform()
+                            Text("kotlinx-datetime-names ${platform.emoji} ${platform.name}")
+                        },
                         colors =
                             TopAppBarDefaults.topAppBarColors(
                                 containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -60,18 +63,6 @@ fun App() {
                         .padding(horizontal = 16.dp, vertical = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                // Platform info
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text(
-                            text = "Running on: ${getPlatform().name}",
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                    }
-                }
-
                 // DateTime Formatting Demo
                 DateTimeFormattingSection(
                     selectedLocale = selectedLocale,
