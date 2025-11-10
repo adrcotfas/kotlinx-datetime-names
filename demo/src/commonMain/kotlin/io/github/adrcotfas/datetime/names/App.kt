@@ -10,11 +10,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import kotlinx.datetime.DayOfWeek
-import kotlinx.datetime.Month
+import kotlinx.datetime.*
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalMaterial3Api::class)
+enum class DateTimeType {
+    LOCAL_DATE_TIME,
+    LOCAL_DATE,
+    LOCAL_TIME
+}
+
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalTime::class)
 @Composable
 @Preview
 fun App() {
@@ -22,6 +29,12 @@ fun App() {
         val localeOptions = remember { createLocaleOptions() }
         var selectedLocale by remember { mutableStateOf(localeOptions.first()) }
         var selectedTextStyle by remember { mutableStateOf(TextStyle.FULL) }
+
+        // DateTime formatting demo states
+        var selectedDateTimeType by remember { mutableStateOf(DateTimeType.LOCAL_DATE_TIME) }
+        var selectedFormatStyle by remember { mutableStateOf(FormatStyle.MEDIUM) }
+        var selectedDateFormatStyle by remember { mutableStateOf(FormatStyle.MEDIUM) }
+        var selectedTimeFormatStyle by remember { mutableStateOf(FormatStyle.MEDIUM) }
 
         Scaffold(
             topBar = {
@@ -34,7 +47,7 @@ fun App() {
                         )
                     )
 
-                    // Chip groups pinned below toolbar
+                    // Locale chips pinned below toolbar
                     Surface(
                         color = MaterialTheme.colorScheme.surface,
                         tonalElevation = 3.dp
@@ -45,7 +58,6 @@ fun App() {
                                 .padding(horizontal = 16.dp, vertical = 12.dp),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            // Locale chips
                             Text(
                                 text = "Locale",
                                 style = MaterialTheme.typography.labelMedium,
@@ -62,28 +74,6 @@ fun App() {
                                         selected = selectedLocale == localeOption,
                                         onClick = { selectedLocale = localeOption },
                                         label = { Text(localeOption.displayName) }
-                                    )
-                                }
-                            }
-
-                            // Text Style chips
-                            Text(
-                                text = "Text Style",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.padding(top = 4.dp)
-                            )
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .horizontalScroll(rememberScrollState()),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                TextStyle.entries.forEach { style ->
-                                    FilterChip(
-                                        selected = selectedTextStyle == style,
-                                        onClick = { selectedTextStyle = style },
-                                        label = { Text(style.name) }
                                     )
                                 }
                             }
@@ -113,8 +103,203 @@ fun App() {
                     }
                 }
 
+                // DateTime Formatting Demo
+                item {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "DateTime Formatting",
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                item {
+                    Card(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                        ) {
+                            // DateTime Type Selection
+                            Text(
+                                text = "Date/Time Type",
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .horizontalScroll(rememberScrollState()),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                DateTimeType.entries.forEach { type ->
+                                    FilterChip(
+                                        selected = selectedDateTimeType == type,
+                                        onClick = { selectedDateTimeType = type },
+                                        label = {
+                                            Text(
+                                                when (type) {
+                                                    DateTimeType.LOCAL_DATE_TIME -> "LocalDateTime"
+                                                    DateTimeType.LOCAL_DATE -> "LocalDate"
+                                                    DateTimeType.LOCAL_TIME -> "LocalTime"
+                                                }
+                                            )
+                                        }
+                                    )
+                                }
+                            }
+
+                            // Format Style Selection (conditional based on type)
+                            when (selectedDateTimeType) {
+                                DateTimeType.LOCAL_DATE_TIME -> {
+                                    // Date Style
+                                    Text(
+                                        text = "Date Style",
+                                        style = MaterialTheme.typography.labelMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .horizontalScroll(rememberScrollState()),
+                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    ) {
+                                        FormatStyle.entries.forEach { style ->
+                                            FilterChip(
+                                                selected = selectedDateFormatStyle == style,
+                                                onClick = { selectedDateFormatStyle = style },
+                                                label = { Text(style.name) }
+                                            )
+                                        }
+                                    }
+
+                                    // Time Style
+                                    Text(
+                                        text = "Time Style",
+                                        style = MaterialTheme.typography.labelMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .horizontalScroll(rememberScrollState()),
+                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    ) {
+                                        FormatStyle.entries.forEach { style ->
+                                            FilterChip(
+                                                selected = selectedTimeFormatStyle == style,
+                                                onClick = { selectedTimeFormatStyle = style },
+                                                label = { Text(style.name) }
+                                            )
+                                        }
+                                    }
+                                }
+                                DateTimeType.LOCAL_DATE, DateTimeType.LOCAL_TIME -> {
+                                    Text(
+                                        text = "Format Style",
+                                        style = MaterialTheme.typography.labelMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .horizontalScroll(rememberScrollState()),
+                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    ) {
+                                        FormatStyle.entries.forEach { style ->
+                                            FilterChip(
+                                                selected = selectedFormatStyle == style,
+                                                onClick = { selectedFormatStyle = style },
+                                                label = { Text(style.name) }
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Formatted result
+                            HorizontalDivider()
+
+                            val formattedResult = remember(
+                                selectedDateTimeType,
+                                selectedFormatStyle,
+                                selectedDateFormatStyle,
+                                selectedTimeFormatStyle,
+                                selectedLocale
+                            ) {
+                                val now = Clock.System.now()
+                                val timeZone = TimeZone.currentSystemDefault()
+                                when (selectedDateTimeType) {
+                                    DateTimeType.LOCAL_DATE_TIME -> {
+                                        now.toLocalDateTime(timeZone).format(
+                                            dateStyle = selectedDateFormatStyle,
+                                            timeStyle = selectedTimeFormatStyle,
+                                            locale = selectedLocale.locale,
+                                            timeZone = timeZone
+                                        )
+                                    }
+                                    DateTimeType.LOCAL_DATE -> {
+                                        now.toLocalDateTime(timeZone).date.format(
+                                            formatStyle = selectedFormatStyle,
+                                            locale = selectedLocale.locale,
+                                            timeZone = timeZone
+                                        )
+                                    }
+                                    DateTimeType.LOCAL_TIME -> {
+                                        now.toLocalDateTime(timeZone).time.format(
+                                            formatStyle = selectedFormatStyle,
+                                            locale = selectedLocale.locale
+                                        )
+                                    }
+                                }
+                            }
+
+                            Text(
+                                text = formattedResult,
+                                style = MaterialTheme.typography.headlineSmall,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                }
+
+                // Text Style Selection
+                item {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Card(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Text(
+                                text = "Text Style",
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .horizontalScroll(rememberScrollState()),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                TextStyle.entries.forEach { style ->
+                                    FilterChip(
+                                        selected = selectedTextStyle == style,
+                                        onClick = { selectedTextStyle = style },
+                                        label = { Text(style.name) }
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
                 // Days of Week
                 item {
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Days of Week",
                         style = MaterialTheme.typography.headlineSmall,
