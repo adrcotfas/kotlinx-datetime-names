@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter
 actual fun LocalDate.format(
     formatStyle: FormatStyle,
     locale: PlatformLocale,
-    timeZone: TimeZone
+    timeZone: TimeZone,
 ): String {
     val javaFormatStyle =
         formatStyleMapping[formatStyle]

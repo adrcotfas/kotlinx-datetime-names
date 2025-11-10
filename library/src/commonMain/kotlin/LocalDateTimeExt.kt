@@ -31,5 +31,5 @@ expect fun LocalDateTime.format(
     dateStyle: FormatStyle = FormatStyle.MEDIUM,
     timeStyle: FormatStyle = FormatStyle.MEDIUM,
     locale: PlatformLocale = getDefaultLocale(),
-    timeZone: TimeZone = TimeZone.currentSystemDefault()
+    timeZone: TimeZone = TimeZone.currentSystemDefault(),
 ): String

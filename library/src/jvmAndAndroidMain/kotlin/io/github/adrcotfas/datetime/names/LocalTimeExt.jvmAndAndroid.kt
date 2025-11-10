@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter
 actual fun LocalTime.format(
     formatStyle: FormatStyle,
     locale: PlatformLocale,
-    timeZone: TimeZone
+    timeZone: TimeZone,
 ): String {
     val javaFormatStyle =
         formatStyleMapping[formatStyle]
@@ -23,6 +23,6 @@ actual fun LocalTime.format(
     return this.toJavaLocalTime().format(
         DateTimeFormatter.ofLocalizedTime(javaFormatStyle)
             .withLocale(locale)
-            .withZone(timeZone.toJavaZoneId())
+            .withZone(timeZone.toJavaZoneId()),
     )
 }

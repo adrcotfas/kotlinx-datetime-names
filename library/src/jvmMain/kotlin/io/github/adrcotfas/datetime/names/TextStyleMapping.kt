@@ -1,6 +1,7 @@
 package io.github.adrcotfas.datetime.names
 
 // Pre-computed mapping from TextStyle to java.time.format.TextStyle
+// Used by JVM target
 internal val textStyleMapping =
     mapOf(
         TextStyle.FULL to java.time.format.TextStyle.FULL,

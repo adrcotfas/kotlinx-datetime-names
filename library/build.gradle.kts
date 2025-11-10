@@ -23,7 +23,6 @@ kotlin {
         minSdk = libs.versions.android.minSdk.get().toInt()
 
         withJava() // enable java compilation support
-        withHostTestBuilder {}.configure {}
         withDeviceTestBuilder {
             sourceSetTreeName = "test"
         }
@@ -43,7 +42,6 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    // Disable default hierarchy since we're using custom source sets
     applyDefaultHierarchyTemplate()
 
     sourceSets {
@@ -65,6 +63,14 @@ kotlin {
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+
+        named("androidDeviceTest").dependencies {
+            dependencies {
+                implementation(libs.androidx.runner)
+                implementation(libs.androidx.core)
+                implementation(libs.androidx.junit)
+            }
         }
     }
 }

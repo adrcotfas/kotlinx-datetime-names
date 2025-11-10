@@ -32,5 +32,5 @@ import kotlinx.datetime.TimeZone
 expect fun LocalTime.format(
     formatStyle: FormatStyle = FormatStyle.SHORT,
     locale: PlatformLocale = getDefaultLocale(),
-    timeZone: TimeZone = TimeZone.currentSystemDefault()
+    timeZone: TimeZone = TimeZone.currentSystemDefault(),
 ): String
