@@ -73,15 +73,35 @@ val time = LocalTime(15, 30, 0)
 dateTime.format(
     dateStyle = FormatStyle.FULL,
     timeStyle = FormatStyle.MEDIUM
-) // "Sunday, December 1, 2024, 3:30:00 PM"
+) // "Sunday, December 1, 2024, 3:30:00 PM" (default locale)
 
 // Format LocalDate
-date.format(FormatStyle.SHORT) // "12/1/24"
-date.format(FormatStyle.FULL)  // "Sunday, December 1, 2024"
+date.format(FormatStyle.SHORT) // "12/1/24" (default locale)
+date.format(FormatStyle.FULL)  // "Sunday, December 1, 2024" (default locale)
 
 // Format LocalTime
-time.format(FormatStyle.SHORT)  // "3:30 PM" (US locale)
-time.format(FormatStyle.MEDIUM) // "3:30:00 PM" (US locale)
+time.format(FormatStyle.SHORT)  // "3:30 PM" (default locale)
+time.format(FormatStyle.MEDIUM) // "3:30:00 PM" (default locale)
+
+// Format with different locales - same date, different results
+val locale = java.util.Locale.GERMAN // or platform-specific locale
+
+date.format(FormatStyle.FULL)
+// Default locale: "Sunday, December 1, 2024"
+// German locale: "Sonntag, 1. Dezember 2024"
+
+date.format(FormatStyle.SHORT, locale)
+// "01.12.24" (German format)
+
+time.format(FormatStyle.MEDIUM, locale)
+// "15:30:00" (24-hour format in German)
+
+dateTime.format(
+    dateStyle = FormatStyle.LONG,
+    timeStyle = FormatStyle.SHORT,
+    locale = locale
+)
+// "1. Dezember 2024, 15:30"
 ```
 
 ### Available Styles
