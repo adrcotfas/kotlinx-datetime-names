@@ -11,7 +11,6 @@ import kotlinx.datetime.TimeZone
  * - On JVM/Android: Uses `DateTimeFormatter.ofLocalizedDateTime(dateStyle, timeStyle)`
  * - On iOS: Uses `NSDateFormatter` with the corresponding date and time styles
  *
- * Time formatting respects the user's 12-hour vs 24-hour preference on both platforms.
  *
  * @param dateStyle The style to use for formatting the date portion (SHORT, MEDIUM, LONG, or FULL).
  *                  Defaults to MEDIUM.
@@ -23,7 +22,7 @@ import kotlinx.datetime.TimeZone
  * @sample
  * ```kotlin
  * val dateTime = LocalDateTime(2024, 12, 1, 15, 30, 0)
- * dateTime.format(FormatStyle.SHORT, FormatStyle.SHORT) // "12/1/24, 3:30 PM" (US locale, 12-hour)
+ * dateTime.format(FormatStyle.SHORT, FormatStyle.SHORT) // "12/1/24, 3:30 PM" (US locale)
  * dateTime.format(FormatStyle.FULL, FormatStyle.MEDIUM) // "Sunday, December 1, 2024, 3:30:00 PM"
  * ```
  */

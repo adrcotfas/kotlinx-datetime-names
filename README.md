@@ -8,7 +8,7 @@ See https://github.com/Kotlin/kotlinx-datetime/pull/586 too.
 
 ## What is it?
 
-This library extends `kotlinx-datetime` by adding extension functions to get localized display names for `DayOfWeek` and `Month` enums. It supports multiple text styles (FULL, SHORT, NARROW) and uses platform-specific localization APIs to provide accurate, locale-aware formatting.
+This library extends `kotlinx-datetime` by adding extension functions to get localized display names for `DayOfWeek` and `Month` enums, as well as format `LocalDateTime`, `LocalDate`, and `LocalTime` values. It supports multiple text styles (FULL, SHORT, NARROW) and format styles, using platform-specific localization APIs to provide accurate, locale-aware formatting.
 
 ## Installation
 
@@ -57,14 +57,48 @@ println(day.getDisplayName(TextStyle.SHORT, locale)) // "Mo"
 println(day.getDisplayName(TextStyle.NARROW, locale)) // "M"
 ```
 
-### Available Text Styles
+### Formatting Date and Time
 
+The library also provides extension functions to format `LocalDateTime`, `LocalDate`, and `LocalTime` with locale-aware formatting:
+
+```kotlin
+import io.github.adrcotfas.datetime.names.*
+import kotlinx.datetime.*
+
+val dateTime = LocalDateTime(2024, 12, 1, 15, 30, 0)
+val date = LocalDate(2024, 12, 1)
+val time = LocalTime(15, 30, 0)
+
+// Format LocalDateTime with separate date and time styles
+dateTime.format(
+    dateStyle = FormatStyle.FULL,
+    timeStyle = FormatStyle.MEDIUM
+) // "Sunday, December 1, 2024, 3:30:00 PM"
+
+// Format LocalDate
+date.format(FormatStyle.SHORT) // "12/1/24"
+date.format(FormatStyle.FULL)  // "Sunday, December 1, 2024"
+
+// Format LocalTime
+time.format(FormatStyle.SHORT)  // "3:30 PM" (US locale)
+time.format(FormatStyle.MEDIUM) // "3:30:00 PM" (US locale)
+```
+
+### Available Styles
+
+**TextStyle** (for day/month names):
 - `TextStyle.FULL` - Full display name (e.g., "Monday", "January")
 - `TextStyle.FULL_STANDALONE` - Full standalone name
 - `TextStyle.SHORT` - Short display name (e.g., "Mon", "Jan")
 - `TextStyle.SHORT_STANDALONE` - Short standalone name
 - `TextStyle.NARROW` - Narrow name (e.g., "M", "J")
 - `TextStyle.NARROW_STANDALONE` - Narrow standalone name
+
+**FormatStyle** (for date/time formatting):
+- `FormatStyle.SHORT` - Shortest format (e.g., "12/1/24", "3:30 PM")
+- `FormatStyle.MEDIUM` - Medium length format (e.g., "Dec 1, 2024", "3:30:00 PM")
+- `FormatStyle.LONG` - Long format with more detail
+- `FormatStyle.FULL` - Longest format (e.g., "Sunday, December 1, 2024")
 
 ## Demo
 The library includes a demo app that showcases localized names across different locales and text styles.
