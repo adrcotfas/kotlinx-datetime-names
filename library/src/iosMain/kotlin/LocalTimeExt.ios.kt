@@ -1,6 +1,8 @@
 package io.github.adrcotfas.datetime.names
 
 import kotlinx.datetime.LocalTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toNSTimeZone
 import platform.Foundation.NSCalendar
 import platform.Foundation.NSDateComponents
 import platform.Foundation.NSDateFormatter
@@ -12,6 +14,7 @@ import platform.Foundation.NSDateFormatterNoStyle
 actual fun LocalTime.format(
     formatStyle: FormatStyle,
     locale: PlatformLocale,
+    timeZone: TimeZone
 ): String {
 
     val dateFormatter =
@@ -26,6 +29,7 @@ actual fun LocalTime.format(
             hour = this@format.hour.toLong()
             minute = this@format.minute.toLong()
             second = this@format.second.toLong()
+            this.timeZone = timeZone.toNSTimeZone()
         }
 
     val calendar = NSCalendar.currentCalendar

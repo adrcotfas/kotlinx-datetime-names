@@ -2,13 +2,10 @@ package io.github.adrcotfas.datetime.names
 
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.number
 import kotlinx.datetime.toNSDateComponents
 import kotlinx.datetime.toNSTimeZone
 import platform.Foundation.NSCalendar
-import platform.Foundation.NSDateComponents
 import platform.Foundation.NSDateFormatter
-import platform.Foundation.NSDateFormatterNoStyle
 
 /**
  * iOS implementation of LocalDate formatting using NSDateFormatter.
@@ -16,7 +13,7 @@ import platform.Foundation.NSDateFormatterNoStyle
 actual fun LocalDate.format(
     formatStyle: FormatStyle,
     locale: PlatformLocale,
-    timezone: TimeZone
+    timeZone: TimeZone
 ): String {
     val nsComponents = this.toNSDateComponents()
     val dateFormatter =
