@@ -9,13 +9,13 @@ runner = "1.7.0"
 vanniktechMavenPublish = "0.34.0"
 kotlinx-datetime = "0.7.1"
 desugar_jdk_libs = "2.1.5"
-composeMultiplatform = "1.9.2"
+composeMultiplatform = "1.9.3"
 androidx-activity = "1.11.0"
 androidx-appcompat = "1.7.1"
 androidx-core = "1.17.0"
 androidx-lifecycle = "2.9.6"
 detekt = "1.23.8"
-ktlint = "13.1.0"
+ktlint = "14.0.1"
 
 [libraries]
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
