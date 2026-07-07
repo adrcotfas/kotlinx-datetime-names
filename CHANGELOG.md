@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2] - 2026-07-07
+
+### Changed
+- Updated dependencies (AGP 9, Kotlin 2.4, Compose Multiplatform 1.11, Gradle 9.4)
+- Migrated the demo to the recommended Kotlin Multiplatform project structure
+
 ## [0.1.1] - 2025-11-10
 
 ### Added

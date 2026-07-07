@@ -1,6 +1,5 @@
 @file:OptIn(ExperimentalKotlinGradlePluginApi::class)
 
-import com.android.build.api.dsl.androidLibrary
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -13,11 +12,11 @@ plugins {
 }
 
 group = "io.github.adrcotfas"
-version = "0.1.1"
+version = "0.1.2"
 
 kotlin {
     jvm()
-    androidLibrary {
+    android {
         namespace = "io.github.adrcotfas.datetime.names"
         compileSdk =
             libs.versions.android.compileSdk
@@ -28,16 +27,15 @@ kotlin {
                 .get()
                 .toInt()
 
-        withJava() // enable java compilation support
         withDeviceTestBuilder {
             sourceSetTreeName = "test"
         }
 
         compilations.configureEach {
-            compilerOptions.configure {
-                jvmTarget.set(
-                    JvmTarget.JVM_11,
-                )
+            compileTaskProvider.configure {
+                compilerOptions {
+                    jvmTarget.set(JvmTarget.JVM_11)
+                }
             }
         }
         compilerOptions {
@@ -51,9 +49,10 @@ kotlin {
     applyDefaultHierarchyTemplate()
 
     sourceSets {
-        val jvmAndAndroidMain by creating {
-            dependsOn(commonMain.get())
-        }
+        val jvmAndAndroidMain =
+            create("jvmAndAndroidMain") {
+                dependsOn(commonMain.get())
+            }
 
         jvmMain {
             dependsOn(jvmAndAndroidMain)
@@ -72,11 +71,9 @@ kotlin {
         }
 
         named("androidDeviceTest").dependencies {
-            dependencies {
-                implementation(libs.androidx.runner)
-                implementation(libs.androidx.core)
-                implementation(libs.androidx.junit)
-            }
+            implementation(libs.androidx.runner)
+            implementation(libs.androidx.core)
+            implementation(libs.androidx.junit)
         }
     }
 }

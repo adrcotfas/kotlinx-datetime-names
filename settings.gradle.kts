@@ -5,6 +5,9 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}
 
 dependencyResolutionManagement {
     repositories {
@@ -15,4 +18,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "kotlinx-datetime-names"
 include(":library")
-include(":demo")
+include(":demo:shared")
+include(":demo:androidApp")
