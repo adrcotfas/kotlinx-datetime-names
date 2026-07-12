@@ -38,9 +38,6 @@ kotlin {
                 }
             }
         }
-        compilerOptions {
-            enableCoreLibraryDesugaring = true
-        }
     }
     iosX64()
     iosArm64()
@@ -76,10 +73,6 @@ kotlin {
             implementation(libs.androidx.junit)
         }
     }
-}
-
-dependencies {
-    coreLibraryDesugaring(libs.desugar.jdk.libs)
 }
 
 mavenPublishing {

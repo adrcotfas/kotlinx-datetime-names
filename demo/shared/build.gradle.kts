@@ -30,9 +30,6 @@ kotlin {
                 }
             }
         }
-        compilerOptions {
-            enableCoreLibraryDesugaring = true
-        }
     }
 
     listOf(
@@ -62,10 +59,6 @@ kotlin {
             implementation(libs.kotlin.test)
         }
     }
-}
-
-dependencies {
-    coreLibraryDesugaring(libs.desugar.jdk.libs)
 }
 
 // Disable Swift Export tasks to avoid "Collection contains more than one matching element" error

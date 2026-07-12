@@ -38,7 +38,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-        isCoreLibraryDesugaringEnabled = true
     }
 }
 
@@ -48,7 +47,6 @@ dependencies {
     implementation(compose.runtime)
     implementation(compose.preview)
     debugImplementation(compose.uiTooling)
-    coreLibraryDesugaring(libs.desugar.jdk.libs)
 }
 
 tasks.matching { it.name == "checkSigningConfiguration" }.configureEach {
