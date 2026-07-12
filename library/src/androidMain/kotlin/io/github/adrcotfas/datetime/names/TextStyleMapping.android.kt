@@ -3,50 +3,15 @@ package io.github.adrcotfas.datetime.names
 import android.icu.text.DateFormatSymbols
 
 /**
- * Represents a mapping from TextStyle to DateFormatSymbols context and width.
- *
- * @property context The DateFormatSymbols context (FORMAT or STANDALONE)
- * @property width The DateFormatSymbols width (WIDE, ABBREVIATED, or NARROW)
+ * Maps our TextStyle enum to a DateFormatSymbols (context, width) pair.
+ * Used by the Android target to retrieve localized names via android.icu.text.DateFormatSymbols.
  */
-internal data class DateFormatSymbolsStyle(
-    val context: Int,
-    val width: Int,
-)
-
-/**
- * Mapping from TextStyle to DateFormatSymbols context and width.
- * Used by Android target to retrieve localized names using android.icu.text.DateFormatSymbols.
- */
-internal val textStyleToDateFormatSymbolsMapping =
-    mapOf(
-        TextStyle.FULL to
-            DateFormatSymbolsStyle(
-                context = DateFormatSymbols.FORMAT,
-                width = DateFormatSymbols.WIDE,
-            ),
-        TextStyle.FULL_STANDALONE to
-            DateFormatSymbolsStyle(
-                context = DateFormatSymbols.STANDALONE,
-                width = DateFormatSymbols.WIDE,
-            ),
-        TextStyle.SHORT to
-            DateFormatSymbolsStyle(
-                context = DateFormatSymbols.FORMAT,
-                width = DateFormatSymbols.ABBREVIATED,
-            ),
-        TextStyle.SHORT_STANDALONE to
-            DateFormatSymbolsStyle(
-                context = DateFormatSymbols.STANDALONE,
-                width = DateFormatSymbols.ABBREVIATED,
-            ),
-        TextStyle.NARROW to
-            DateFormatSymbolsStyle(
-                context = DateFormatSymbols.FORMAT,
-                width = DateFormatSymbols.NARROW,
-            ),
-        TextStyle.NARROW_STANDALONE to
-            DateFormatSymbolsStyle(
-                context = DateFormatSymbols.STANDALONE,
-                width = DateFormatSymbols.NARROW,
-            ),
-    )
+internal fun TextStyle.toDateFormatSymbolsStyle(): Pair<Int, Int> =
+    when (this) {
+        TextStyle.FULL -> DateFormatSymbols.FORMAT to DateFormatSymbols.WIDE
+        TextStyle.FULL_STANDALONE -> DateFormatSymbols.STANDALONE to DateFormatSymbols.WIDE
+        TextStyle.SHORT -> DateFormatSymbols.FORMAT to DateFormatSymbols.ABBREVIATED
+        TextStyle.SHORT_STANDALONE -> DateFormatSymbols.STANDALONE to DateFormatSymbols.ABBREVIATED
+        TextStyle.NARROW -> DateFormatSymbols.FORMAT to DateFormatSymbols.NARROW
+        TextStyle.NARROW_STANDALONE -> DateFormatSymbols.STANDALONE to DateFormatSymbols.NARROW
+    }

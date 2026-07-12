@@ -21,10 +21,16 @@ actual fun LocalTime.format(
             this.locale = locale
             this.dateStyle = NSDateFormatterNoStyle
             this.timeStyle = formatStyle.toNSDateFormatterStyle()
+            this.timeZone = timeZone.toNSTimeZone()
         }
 
+    // A fixed modern date keeps NSCalendar from resolving the zone at its
+    // ancient reference date, where historic local-mean-time offsets apply
     val dateComponents =
         NSDateComponents().apply {
+            year = 2000
+            month = 1
+            day = 1
             hour = this@format.hour.toLong()
             minute = this@format.minute.toLong()
             second = this@format.second.toLong()

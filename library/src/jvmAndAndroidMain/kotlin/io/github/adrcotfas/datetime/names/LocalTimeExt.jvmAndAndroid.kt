@@ -15,15 +15,10 @@ actual fun LocalTime.format(
     formatStyle: FormatStyle,
     locale: PlatformLocale,
     timeZone: TimeZone,
-): String {
-    val javaFormatStyle =
-        formatStyleMapping[formatStyle]
-            ?: error("Unknown FormatStyle: $formatStyle")
-
-    return this.toJavaLocalTime().format(
+): String =
+    this.toJavaLocalTime().format(
         DateTimeFormatter
-            .ofLocalizedTime(javaFormatStyle)
+            .ofLocalizedTime(formatStyle.toJavaFormatStyle())
             .withLocale(locale)
             .withZone(timeZone.toJavaZoneId()),
     )
-}

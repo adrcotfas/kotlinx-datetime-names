@@ -14,13 +14,9 @@ actual fun LocalDate.format(
     locale: PlatformLocale,
     timeZone: TimeZone,
 ): String {
-    val javaFormatStyle =
-        formatStyleMapping[formatStyle]
-            ?: error("Unknown FormatStyle: $formatStyle")
-
     val formatter =
         DateTimeFormatter
-            .ofLocalizedDate(javaFormatStyle)
+            .ofLocalizedDate(formatStyle.toJavaFormatStyle())
             .withLocale(locale)
             .withZone(timeZone.toJavaZoneId())
 

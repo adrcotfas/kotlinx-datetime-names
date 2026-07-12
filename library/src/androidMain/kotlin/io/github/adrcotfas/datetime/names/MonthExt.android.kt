@@ -9,10 +9,7 @@ actual fun Month.getDisplayName(
     locale: PlatformLocale,
 ): String {
     val symbols = DateFormatSymbols.getInstance(ULocale.forLocale(locale))
-    val style =
-        textStyleToDateFormatSymbolsMapping[textStyle]
-            ?: error("Unknown TextStyle: $textStyle")
+    val (context, width) = textStyle.toDateFormatSymbolsStyle()
 
-    val months = symbols.getMonths(style.context, style.width)
-    return months[this.ordinal]
+    return symbols.getMonths(context, width)[this.ordinal]
 }

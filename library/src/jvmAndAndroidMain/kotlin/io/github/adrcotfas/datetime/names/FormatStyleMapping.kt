@@ -5,10 +5,10 @@ import java.time.format.FormatStyle as JavaFormatStyle
 /**
  * Maps our FormatStyle enum to Java's FormatStyle enum.
  */
-internal val formatStyleMapping: Map<FormatStyle, JavaFormatStyle> =
-    mapOf(
-        FormatStyle.SHORT to JavaFormatStyle.SHORT,
-        FormatStyle.MEDIUM to JavaFormatStyle.MEDIUM,
-        FormatStyle.LONG to JavaFormatStyle.LONG,
-        FormatStyle.FULL to JavaFormatStyle.FULL,
-    )
+internal fun FormatStyle.toJavaFormatStyle(): JavaFormatStyle =
+    when (this) {
+        FormatStyle.SHORT -> JavaFormatStyle.SHORT
+        FormatStyle.MEDIUM -> JavaFormatStyle.MEDIUM
+        FormatStyle.LONG -> JavaFormatStyle.LONG
+        FormatStyle.FULL -> JavaFormatStyle.FULL
+    }

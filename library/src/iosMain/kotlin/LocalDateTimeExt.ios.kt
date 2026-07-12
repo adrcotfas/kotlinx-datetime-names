@@ -16,7 +16,10 @@ actual fun LocalDateTime.format(
     locale: PlatformLocale,
     timeZone: TimeZone,
 ): String {
-    val nsComponents = this.toNSDateComponents()
+    val nsComponents =
+        this.toNSDateComponents().apply {
+            this.timeZone = timeZone.toNSTimeZone()
+        }
     val dateFormatter =
         NSDateFormatter().apply {
             this.locale = locale
