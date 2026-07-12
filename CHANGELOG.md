@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2026-07-12
+
+### Changed
+- **Breaking**: Android minSdk raised from 24 to 26; core library desugaring is no longer required by consumers
+
+### Fixed
+- iOS: `LocalDate.format()`, `LocalDateTime.format()` and `LocalTime.format()` shifted the wall-clock values when the `timeZone` parameter differed from the system timezone
+- iOS: `LocalTime.format()` could apply historic local-mean-time offsets, producing odd minute values
+- iOS: removed an unsynchronized calendar cache that could cause a data race in `Month.getDisplayName()` and `DayOfWeek.getDisplayName()` under concurrent use
+
 ## [0.1.2] - 2026-07-07
 
 ### Changed
